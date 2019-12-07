@@ -1,5 +1,6 @@
 package com.ibm.ssnb.controller;
 
+import com.ibm.ssnb.util.BrowserUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,7 +38,14 @@ public class IndexController {
     public ModelAndView login(HttpServletRequest req, HttpServletResponse res) {
 
         ModelAndView mav = new ModelAndView();
-        mav.setViewName("/pc/login/login");
+        String userAgent = req.getHeader("User-Agent");
+        if (BrowserUtil.checkUserAgent(userAgent)) {
+            mav.setViewName("/pc/login/login");
+
+        } else {
+            mav.setViewName("/common/s_mode");
+
+        }
         return mav;
     }
 
@@ -45,8 +53,18 @@ public class IndexController {
      * # 后台主页
      */
     @RequestMapping("/admin/main")
-    public String admin_main(){
-        return "/admin/main";
+    public ModelAndView admin_main(HttpServletResponse res, HttpServletRequest req){
+        // return "/admin/main";
+
+        ModelAndView mav = new ModelAndView();
+        String userAgent = req.getHeader("User-Agent");
+        if (BrowserUtil.checkUserAgent(userAgent)) {
+            mav.setViewName("/admin/main");
+
+        } else {
+            mav.setViewName("/common/s_mode");
+        }
+        return mav;
     }
 
 }
