@@ -13,6 +13,8 @@ import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 
 import javax.annotation.Resource;
+import java.util.HashSet;
+import java.util.Set;
 
 public class MyRealm extends AuthorizingRealm {
 
@@ -28,8 +30,14 @@ public class MyRealm extends AuthorizingRealm {
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
         String name = (String)SecurityUtils.getSubject().getPrincipal();
         User user = userDao.findByName(name);
+
+        // 有了用户就可以拿到角色，有了角色，就可以得到对应的菜单list集合 -permissions
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
-        info.addStringPermission("user:add"); // 添加权限
+
+        Set<String> roles = new HashSet<String>();
+        roles.add("管理员");
+        info.addStringPermission("添加用户权限"); // 添加权限
+        info.setRoles(roles);
         return info;
     }
 
