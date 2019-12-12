@@ -1,0 +1,41 @@
+body{
+    padding-top: 3px;
+}
+
+er {
+    font-style: normal;color: #c00;
+}
+ber {
+    font-style: normal;color: #c00;font-weight: bold;
+}
+
+eg {
+    font-style: normal;color: #009688;
+}
+beb {
+    font-style: normal;font-weight: bold;color: #1E9FFF;
+}
+
+/*修改table表格左右内边框为0*/
+.layui-table-cell {
+    padding-left: 0px;
+    padding-right: 0px;
+    text-align: center;
+}
+
+/* 修复table上面的10px改成0px*/
+.layui-table-view {
+    margin: 0px 0 !important;
+
+}
+
+/* 修复管理页面 左边的复选框 有点靠上*/
+.layui-table-cell .layui-form-checkobx[lay-skin=primary] {
+    top: 4px;
+
+}
+
+
+
+
+

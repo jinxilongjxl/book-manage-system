@@ -53,12 +53,20 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public List<Role> list(Map<String, Object> map, int page, int pageSize) {
-        // Pageable pageable = new PageRequest(0, 11, Sort.Direction.ASC, "orderNo");
-        Pageable pageable = PageRequest.of(0, 11, Sort.Direction.ASC);
+        // Pageable pageable = new PageRequest(0, pageSize, Sort.Direction.ASC, "orderNo");
+        // Pageable pageable = PageRequest.of(0, 11, Sort.Direction.ASC);
+        Pageable pageable = PageRequest.of(0, pageSize, Sort.Direction.ASC, "orderNo");
         Page<Role> list = roleDao.findAll(pageable);
 
         return list.getContent();
     }
+
+    // @Override
+    // public List<Role> list(Map<String, Object> map, Integer page, Integer pageSize) {
+    //     Pageable pageable = new PageRequest(page, pageSize, Sort.Direction.ASC, "orderNo");
+    //     Page<Role> list = roleDao.findAll(pageable);
+    //     return list.getContent();// 拿到list集合
+    // }
 
     @Override
     public Long getTotal(Map<String, Object> map) {
