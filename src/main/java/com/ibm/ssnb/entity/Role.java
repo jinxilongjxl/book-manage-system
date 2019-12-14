@@ -1,5 +1,7 @@
 package com.ibm.ssnb.entity;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
@@ -52,6 +54,7 @@ public class Role {
         this.orderNo = orderNo;
     }
 
+    @JsonSerialize(using = CustomDateTimeSerializer.class)
     public Date getCreateDateTime() {
         return createDateTime;
     }
@@ -60,6 +63,7 @@ public class Role {
         this.createDateTime = createDateTime;
     }
 
+    @JsonSerialize(using = CustomDateTimeSerializer.class)
     public Date getUpdateDateTime() {
         return updateDateTime;
     }
