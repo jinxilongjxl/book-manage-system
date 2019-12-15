@@ -1,8 +1,13 @@
 package com.ibm.ssnb.service.impl;
 
 import com.ibm.ssnb.dao.UserDao;
+import com.ibm.ssnb.entity.Role;
 import com.ibm.ssnb.entity.User;
 import com.ibm.ssnb.service.UserService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -19,6 +24,7 @@ public class UserServiceImpl implements UserService {
     public Integer update(User user) {
         User origin = userDao.findId(user.getId());
         user = replace(user, origin);
+        userDao.save(user);
         return 1;
     }
 
@@ -57,11 +63,15 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<User> list(Map<String, Object> map, Integer page, Integer pageSize) {
-        return null;
+
+        Pageable pageable = PageRequest.of(0, pageSize, Sort.Direction.ASC, "orderNo");
+        Page<User> list = userDao.findAll(pageable);
+        return list.getContent();
     }
 
     @Override
     public Long getTotal(Map<String, Object> map) {
-        return null;
+
+        return userDao.count();
     }
 }

@@ -2,6 +2,7 @@ package com.ibm.ssnb.houtai;
 
 import com.ibm.ssnb.dao.UserDao;
 import com.ibm.ssnb.entity.Role;
+import com.ibm.ssnb.entity.User;
 import com.ibm.ssnb.service.RoleService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,7 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
-@RequestMapping("/houtai")
+@RequestMapping("/houtai/user")
 public class Houtai_User_Controller {
 
     @Resource
@@ -42,6 +43,24 @@ public class Houtai_User_Controller {
         mav.addObject("flag", true);
         mav.addObject("btn_text", "添加");
         mav.addObject("save_url", "/admin/user/add");
+        mav.setViewName("/admin/page/user/add_update");
+        return mav;
+    }
+
+    @RequestMapping("/edit")
+    public ModelAndView edit(@RequestParam(value = "id", required = false) Integer id) throws Exception {
+        ModelAndView mav = new ModelAndView();
+
+        Map<String, Object> map = null;
+        List<Role> roleList = roleService.list(map, 0, 1000);
+        mav.addObject("roleList", roleList);
+
+
+
+        User user = userDao.findId(id);
+        mav.addObject("user", user);
+        mav.addObject("btn_text", "修改");
+        mav.addObject("save_url", "/admin/user/update?id=" + id);
         mav.setViewName("/admin/page/user/add_update");
         return mav;
     }

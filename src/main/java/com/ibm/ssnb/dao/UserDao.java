@@ -8,7 +8,7 @@ public interface UserDao extends JpaRepository<User, Integer> {
 
     public User findByName(String name);
 
-    @Query(value = "select * from t_a_user where id =?!", nativeQuery = true)
+    @Query(value = "select * from t_a_user where id =?1", nativeQuery = true)
     public User findId(Integer id);
 
 

@@ -6,9 +6,9 @@ server:
 # jdbc
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/db_book_system?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf-8
+    url: jdbc:mysql://47.103.43.89:3306/db_book_system?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf-8
     username: root
-    password: jxl63138495
+    password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
   servlet:
     multipart:
@@ -19,7 +19,8 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
-# thymeleaf config
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+  # thymeleaf config
   thymeleaf:
     cache: false
     suffix: .html
